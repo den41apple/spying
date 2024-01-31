@@ -26,6 +26,10 @@ async def add_links(links: list[str]):
 async def get_links() -> list[Link]:
     """
     Получает список ссылок
+
+    Возвращает:
+    ----------
+        list[Link] - Список с объектами ссылок
     """
     statement = select(Link)
     async with async_session() as session:
