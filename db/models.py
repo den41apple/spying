@@ -1,20 +1,24 @@
 """
 Модель БД
 """
-"""
-Инициализация объектов базы данных
-"""
-from sqlalchemy import MetaData
-from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
-from sqlalchemy.orm import declarative_base, sessionmaker
+from datetime import datetime
 
-import config
+from sqlalchemy import Column, Integer, String, DateTime, func
+
+from .db import Base
 
 
-DB_URL = f"sqlite3:///data.db"
+class Link(Base):
+    """
+    Ссылка по которой проходил пользователь
+    """
+    __tablename__ = 'links'
+    id = Column(Integer, primary_key=True)
+    link = Column(String())
+    created_at = Column(DateTime, default=datetime.utcnow, server_default=func.now(), nullable=False)
 
-async_engine = create_async_engine(url=DB_URL, echo=False)
-async_session = sessionmaker(async_engine, expire_on_commit=False, class_=AsyncSession)
+    def __str__(self):
+        return f"Link(id={self.id}, link={self.chat_id})"
 
-metadata = MetaData()
-Base = declarative_base(bind=async_engine, metadata=metadata)
+    def __repr__(self):
+        return str(self)

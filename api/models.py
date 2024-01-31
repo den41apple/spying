@@ -13,3 +13,8 @@ class LinksRequestData(BaseModel):
 
 class LinksResponse(BaseModel):
     status: str
+
+
+class DomainsResponse(BaseModel):
+    domains: list[str]
+    status: str
