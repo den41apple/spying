@@ -5,9 +5,6 @@ from sqlalchemy import MetaData
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import declarative_base, sessionmaker
 
-import config
-
-
 DB_URL = f"sqlite+aiosqlite:///data.db"
 
 async_engine = create_async_engine(url=DB_URL, echo=False)

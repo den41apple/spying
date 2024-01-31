@@ -3,8 +3,8 @@
 """
 from urllib.parse import urlparse
 
-from fastapi import FastAPI
 import uvicorn
+from fastapi import FastAPI
 
 from api.models import LinksRequestData, LinksResponse, DomainsResponse
 from db.actions import add_links, get_links

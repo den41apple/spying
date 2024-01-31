@@ -23,7 +23,6 @@ async def add_links(links: list[str]):
         await session.commit()
 
 
-
 async def get_links() -> list[Link]:
     """
     Получает список ссылок
