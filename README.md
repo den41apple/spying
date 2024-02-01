@@ -47,5 +47,5 @@ http://127.0.0.1:8000/docs
 │
 └───tests
         conftest.py
-        tests.py       # Тесты API
+        tests.py      # Тесты API
 ```
