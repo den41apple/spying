@@ -1,3 +1,5 @@
+import asyncio
+
 import pytest
 from httpx import AsyncClient
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -6,7 +8,7 @@ from app import app
 from db.db import async_session, async_engine, metadata
 
 
-@pytest.fixture(autouse=True, scope="session")
+@pytest.fixture(autouse=True, scope="function")
 async def prepare_database():
     """
     Подготавливает БД
@@ -16,6 +18,13 @@ async def prepare_database():
     yield
     async with async_engine.begin() as connection:
         await connection.run_sync(metadata.drop_all)
+
+
+@pytest.fixture(scope="session")
+def event_loop():
+    loop = asyncio.get_event_loop_policy().new_event_loop()
+    yield loop
+    loop.close()
 
 
 @pytest.fixture(scope="session")
@@ -32,5 +41,5 @@ async def async_client():
     """
     Http клиент
     """
-    async with AsyncClient(app=app, base_url="http://test") as client:
+    async with AsyncClient(app=app, base_url="http://localhost:8000") as client:
         yield client

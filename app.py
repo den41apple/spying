@@ -16,24 +16,29 @@ app = FastAPI()
 
 
 @app.post("/visited_links", response_model=VisitedLinksResponse)
-async def visited_links(data: VisitedLinksRequestData):
+async def visited_links(data: VisitedLinksRequestData = None):
     """
     Отправить список ссылок, которые были посещены работником
     """
     status = "ok"
     valid_links = []
     invalid_links = []
-    for link in data.links:
-        if is_valid_url(link):
-            valid_links.append(link)
-        else:
-            invalid_links.append(link)
-    if invalid_links:
-        status = "Следующие ссылки имеют неверный формат и не были добавлены: "
-        invalid_links = (f'"{el}"' for el in invalid_links)
-        status += ",".join(invalid_links)
-    if valid_links:
-        await _add_links(valid_links)
+    if data is None or not data.links:
+        # Если ссылок не было передано
+        status = "Необходимо передать ссылки"
+    else:
+        # Разделение на валидные и не валидные ссылки
+        for link in data.links:
+            if is_valid_url(link):
+                valid_links.append(link)
+            else:
+                invalid_links.append(link)
+        if invalid_links:
+            status = "Следующие ссылки имеют неверный формат и не были добавлены: "
+            invalid_links = (f'"{el}"' for el in invalid_links)
+            status += ",".join(invalid_links)
+        if valid_links:
+            await _add_links(valid_links)
     return {'status': status}
 
 
