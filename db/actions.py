@@ -47,7 +47,7 @@ async def get_links(_from: int | None = None,
         statement = statement.where(Link.created_at >= _from)
     if to:
         to = datetime.fromtimestamp(to)
-        statement = statement.where(Link.created_at >= to)
+        statement = statement.where(Link.created_at <= to)
     statement = statement.distinct()
     async with async_session() as session:
         result: Result = await session.scalars(statement)
