@@ -4,17 +4,17 @@
 from pydantic import BaseModel
 
 
-class LinksRequestData(BaseModel):
+class VisitedLinksRequestData(BaseModel):
     """
     Список ссылок, которые были посещены работником
     """
     links: list[str]
 
 
-class LinksResponse(BaseModel):
+class VisitedLinksResponse(BaseModel):
     status: str
 
 
-class DomainsResponse(BaseModel):
+class VisitedDomainsResponse(BaseModel):
     domains: list[str]
     status: str

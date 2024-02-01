@@ -18,7 +18,7 @@ class Link(Base):
     created_at = Column(DateTime, default=datetime.utcnow, server_default=func.now(), nullable=False)
 
     def __str__(self):
-        return f"Link(id={self.id}, link={self.chat_id})"
+        return f"Link(id={self.id}, link={self.link}, created_at={self.created_at})"
 
     def __repr__(self):
         return str(self)
