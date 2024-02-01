@@ -2,8 +2,8 @@ import pytest
 from httpx import AsyncClient
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from main import app
 from db.db import async_session, async_engine, metadata
+from main import app
 
 
 @pytest.fixture(autouse=True, scope="function")
