@@ -9,8 +9,11 @@ python -m pip install -r requirements.txt
 
 ### Переменные окружения
 ```
-DB_ECHO <bool> - Включает вывод SQL в командной строке
-DB_FILE <str> - Путь до файла с БД
+DB_ECHO <bool> - Включает вывод SQL в командной строке. 
+По умолчанию: false
+
+DB_FILE <str> - Путь до файла с БД. 
+По умолчанию: "data.db"
 ```
 
 ### Запуск сервера
